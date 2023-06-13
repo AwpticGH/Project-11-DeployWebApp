@@ -24,7 +24,7 @@ public class LoginServlet extends FirebaseServlet {
         model.setPassword(password);
 
         AsyncContext async = request.startAsync();
-        AuthController lc = new AuthController(async);
+        AuthController lc = new AuthController();
         lc.get(request, model);
 
         response.sendRedirect("/");
