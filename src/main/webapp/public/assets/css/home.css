@@ -1,0 +1,346 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jul 4, 2022, 9:22:29 PM
+    Author     : rafih
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+br {
+    height: 1rem;
+}
+
+.slideshow-background {
+    height: 40vh;
+    background: linear-gradient(135deg, #9370DB, #87CEFA);
+    display: flex;  
+    /* filter: brightness(0.5); */
+}
+
+.main-background {
+    content: "";
+    background-color: #f0f0f0;
+    height: 50vh;
+    margin-top: calc(-424px + 1.9rem);
+    /* filter: brightness(0.5); */
+}
+
+.container {
+    width: 60rem;
+    margin: auto;
+}
+
+.slideshow {
+    height: 13rem;
+}
+
+.slideshow-img {
+    width: 33%;
+    height: 100%;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.search-box {
+    margin-top: -2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    z-index: 20;
+}
+
+.search-box .header {
+    background: linear-gradient(135deg, #9370DB, #87CEFA);
+    border-radius: 10px 10px 0 0;
+    padding: 1rem 1rem 1rem 2rem;
+}
+
+.search-box .promo-group {
+    background-color: #f0f0f0;
+    padding: 1rem 1rem 1rem 2rem;
+}
+
+.search-box .promo-group .col-11 .text {
+    margin-top: 4px;
+    margin-left: -2rem;
+}
+
+input {
+    width: 18px;
+    height: 18px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+}
+
+.search-box .promo-group .row label {
+    font-size: 18px;
+}
+
+.search-box .search-group {
+    border-top: 1px solid lightslategray;
+    border-bottom: 1px solid lightslategray;
+    height: 99px;
+    background-color: #f0f0f0;
+}
+
+.search-box .footer {
+    height: 80px;
+    padding: 1rem;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+.search-box .footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.select-box {
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+}
+
+.select-box .options-container {
+    background: #f0f0f0;
+    color: black;
+    max-height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+    border-radius: 8px;
+    overflow: hidden;
+    order: 1;
+}
+
+.selected {
+    background: #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: black;
+    position: relative;
+    order: 0;
+}
+
+.selected::after {
+    content: "";
+    background: url("img/arrow-down.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 100%;
+    width: 32px;
+    right: 10px;
+    top: 5px;
+    transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+}
+
+.select-box .options-container.active+.selected::after {
+    transform: rotateX(180deg);
+    top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.select-box .option:hover {
+    background: #414b57;
+}
+
+.select-box label {
+    cursor: pointer;
+}
+
+.select-box .option .radio {
+    display: none;
+}
+
+.btn-submit {
+    background-color: #87CEFA;
+    width: 9rem;
+    height: 3rem;
+    border-radius: 20px;
+    border: 1px solid lightslategray;
+}
+
+.btn-submit:disabled:hover {
+    cursor: not-allowed;
+}
+
+.btn-submit:enabled:hover {
+    cursor: pointer;
+}
+
+.text {
+    margin: 0;
+}
+
+form .from-to {
+    padding: 1rem 1rem 1rem 2rem;
+    border-right: 1px solid lightslategray;
+}
+
+form .from-to input {
+    /* display: block; */
+    width: 100%;
+    height: 2rem;
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+form .departure-arrival {
+    padding: 1rem;
+    border-right: 1px solid lightslategray;
+}
+
+form .departure-arrival input {
+    width: 100%;
+    height: 2rem;
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+form .departure-arrival input:hover {
+    cursor: pointer;
+}
+
+form .departure-arrival input:disabled:hover {
+    cursor: not-allowed;
+}
+
+form .departure-arrival .checkbox {
+    width: 16px;
+    height: 16px;
+    margin-top: 0;
+}
+
+form .passenger-class {
+    padding: 1rem;
+}
+
+form .passenger-class input {
+    width: 100%;
+    height: 2rem;
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+form .passenger-class input:hover {
+    cursor: pointer;
+}
+
+.label-form {
+    font-size: 14px;
+}
+
+.label-form:hover {
+    cursor: pointer;
+}
+
+input {
+    border: 0;
+}
+
+/* Passenger, Seat Class Panels */
+.container-lists {
+    width: 20rem;
+    height: 15rem;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0rem 1rem;
+    background-color: white;
+    margin-top: 1rem;
+    overflow: scroll;
+    display: none;
+    position: absolute;
+    z-index: 10;
+}
+
+.container-lists input {
+    border-bottom: 1px solid lightslategray;
+    margin: auto;
+    background-color: white;
+    width: 100%;
+}
+
+.container-lists button {
+    border: none;
+    border-bottom: 1px solid lightslategray;
+    margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    width: 100%;
+    text-align: left;
+}
+
+.container-lists button:hover {
+    background-color: #87CEFA;
+}
+
+.container-lists button:last-child {
+    border-bottom: none;
+}
+
+#passenger-list {
+    margin-left: -9rem;
+}
+
+#passenger-list .btn-increase, #passenger-list .btn-decrease {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    border: 2px solid black;
+    display: inline;
+}
+
+#passenger-list button, #passenger-list p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#seat-class {
+    height: 100%;
+    border-left: 1px solid black;
+}
+
+#passenger-list #passenger-count, #passenger-list #seat-class {
+    padding: 0 10px;
+}
+
+#seat-class button {
+    border: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#seat-class button:first-child {
+    margin-top: 16px;
+}

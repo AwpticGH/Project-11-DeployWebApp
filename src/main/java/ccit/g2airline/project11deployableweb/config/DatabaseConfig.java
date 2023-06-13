@@ -8,7 +8,7 @@ public class DatabaseConfig {
     private static final String DB_URL = "https://g2airline-8447d-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
     public static DatabaseReference getReference(String path) {
-        return FirebaseDatabase.getInstance(DB_URL).getReference(path);
+        return FirebaseDatabase.getInstance(DB_URL).getReference(path).child("data");
     }
 
     public static DatabaseReference getReference(String[] paths) {

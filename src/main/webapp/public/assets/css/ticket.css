@@ -1,0 +1,129 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jul 12, 2022, 12:00:30 PM
+    Author     : rafih
+*/
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel {
+    width: 70rem;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: fit-content;
+    background: white;
+}
+
+.shadowed {
+    box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.flight-detail {
+    color: black;
+    height: 15rem;
+    margin: auto;
+    margin-top: 7rem;
+}
+
+.flight-detail p {
+    margin-bottom: 0;
+}
+
+.flight-detail .text {
+    padding: 1rem;
+}
+
+.flight-detail .footer {
+    margin-top: 1rem;
+}
+
+.flight-detail .footer p {
+    margin-bottom: 0;
+}
+
+.flight-detail .header {
+    padding-top: 1rem;
+}
+
+.flight-detail .header hr {
+    color: black;
+    background-color: black;
+    margin-top: 0.5rem;
+}
+
+.flight-detail .from-to-time-airport {
+    margin-top: 3rem;
+}
+
+.flight-detail .from-to-time-airport .from-to {
+    margin-top: 2rem;
+}
+
+.passenger-detail {
+    height: 17rem;
+}
+
+.passenger-detail th {
+    width: 10rem;
+    text-align: left;
+}
+
+.passenger-detail th.number {
+    width: unset;
+}
+
+.passenger-detail th.name {
+    width: 30rem;
+}
+
+.passenger-detail .phone {
+    width: 10rem;
+}
+
+.btn-panel-searched {
+    float: right;
+    background-color: lightgray;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    margin-top: 5rem;
+    height: 3rem;
+    width: 12rem;
+}
+
+.arrow {
+    font-size: 2.5rem;
+    margin-left: auto;
+}
+
+body {
+    background: linear-gradient(135deg, #9370DB, #87CEFA);
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    margin-top: 18.72px;
+    margin-bottom: 18.72px;
+}
+
+br {
+    display: block;
+    content: "";
+    height: 1rem;
+}
+
+hr {
+    color: black;
+    background-color: black;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
