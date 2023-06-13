@@ -8,6 +8,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -18,49 +22,33 @@ public class HelloServlet extends HttpServlet {
 
     public void init() {
         FirebaseConfig.init();
-        String path = "users/1";
+        String path = "users/1/email";
         ref = DatabaseConfig.getReference(path);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-        // Hello
-        System.out.println(ref.getKey());
-        System.out.println(ref.getDatabase().toString());
-        System.out.println(ref.getParent().toString());
-        System.out.println(ref.getRoot().toString());
-        System.out.println(ref.child("email").toString());
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("f");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("g");
-            }
-        });
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/hello.jsp");
+        try {
+            System.out.println("dispatching");
+            dispatcher.forward(request, response);
+            System.out.println("dispatched");
+        } catch (ServletException e) {
+            System.out.println("SERVLET ERROR");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            System.out.println("FILE NOT FOUND");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("a");
-                PrintWriter out = null;
-                try {
-                    out = response.getWriter();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("b");
-                out.println("<html><body>");
-                out.println("<h1>" + dataSnapshot.getKey() + "</h1>");
-                out.println("<h1>" + dataSnapshot.child("email").getKey() + "</h1>");
-                out.println("<h1>" + dataSnapshot.getValue().toString() + "</h1>");
-                out.println("<h1>" + dataSnapshot.child("email").getValue().toString() + "</h1>");
-                out.println("</body></html>");
-                System.out.println("c");
+                String email = dataSnapshot.getValue().toString();
+                System.out.println(email);
+                request.setAttribute("email", email);
             }
 
             @Override
@@ -69,7 +57,6 @@ public class HelloServlet extends HttpServlet {
                 databaseError.getMessage();
             }
         });
-        System.out.println("e");
     }
 
     public void destroy() {
