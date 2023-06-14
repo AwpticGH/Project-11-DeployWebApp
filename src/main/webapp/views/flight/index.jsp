@@ -1,6 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebRoute" %>
+<%@page contentType="text/html; ISO-8859-1" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <jsp:include page="${pageContext.request.contextPath}/views/layouts/head.jsp">
         <jsp:param name="page-title" value="Home"/>
@@ -42,7 +43,7 @@
                 </label>
             </div>
         </div>
-        <form action="/flight/show" method="GET">
+        <form action="<%= WebRoute.FLIGHT_SHOW %>" method="GET">
             <div class="search-group">
                 <div class="col-2_5 from-to" id="from">
                     <div class="select-box">

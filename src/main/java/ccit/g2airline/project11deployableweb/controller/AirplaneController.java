@@ -4,8 +4,8 @@ import ccit.g2airline.project11deployableweb.config.DatabaseConfig;
 import ccit.g2airline.project11deployableweb.dictionary.DatabaseTable;
 import ccit.g2airline.project11deployableweb.dictionary.WebVariable;
 import ccit.g2airline.project11deployableweb.model.BaseModel;
+import ccit.g2airline.project11deployableweb.model.database.AirlineModel;
 import ccit.g2airline.project11deployableweb.model.database.AirplaneModel;
-import ccit.g2airline.project11deployableweb.model.database.FlightModel;
 import ccit.g2airline.project11deployableweb.model.web.FlightSearchedModel;
 import ccit.g2airline.project11deployableweb.myInterface.database.ReadData;
 import com.google.firebase.database.DataSnapshot;
@@ -17,38 +17,33 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlightController extends BaseController implements ReadData {
-
+public class AirplaneController extends BaseController implements ReadData {
     @Override
     public void get(HttpServletRequest request, BaseModel baseModel) {
-        System.out.println("Getting Flight");
+        System.out.println("Getting Airplane");
         FlightSearchedModel model = (FlightSearchedModel) baseModel;
-        DatabaseReference reference = DatabaseConfig.getReference(DatabaseTable.TABLE_FLIGHTS);
-
-        List<AirplaneModel> airplaneModels = new ArrayList<>();
+        List<AirlineModel> airlineModels = new ArrayList<>();
+        DatabaseReference reference = DatabaseConfig.getReference(DatabaseTable.TABLE_AIRPLANES);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int iterator = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    FlightModel result = data.getValue(FlightModel.class);
-                    AirplaneModel airplaneModel = new AirplaneModel();
-                    if (result.getRoute_id().equals(model.getRouteModel().getId()) &&
-                            (result.getTime_of_departure().contains(model.getFlightModels().get(0).getTime_of_departure()) ||
-                                    result.getTime_of_departure().equals(model.getFlightModels().get(0).getTime_of_departure()))) {
-                        if (model.getFlightModels().get(0).getId() == null) {
-                            model.getFlightModels().add(0, result);
-                        }
-                        else {
-                            model.getFlightModels().add(result);
-                        }
-
-                        airplaneModel.setId(result.getAirplane_id());
-                        airplaneModels.add(airplaneModel);
+                    AirplaneModel result = data.getValue(AirplaneModel.class);
+                    AirlineModel airlineModel = new AirlineModel();
+                    if (result.getId().equals(model.getAirplaneModels().get(iterator).getId())) {
+                        model.getAirplaneModels().set(iterator, result);
+                        airlineModel.setId(result.getId());
+                        airlineModels.add(airlineModel);
+                        iterator++;
+                    }
+                    if (iterator == model.getAirplaneModels().size() - 1) {
+                        break;
                     }
                 }
-                model.setAirplaneModels(airplaneModels);
+                model.setAirlineModels(airlineModels);
 
-                AirplaneController ac = new AirplaneController();
+                AirlineController ac = new AirlineController();
                 ac.get(request, model);
             }
 

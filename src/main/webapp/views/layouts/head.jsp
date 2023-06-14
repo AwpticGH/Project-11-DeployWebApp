@@ -6,8 +6,8 @@
 <title>G2Airline - <%= request.getParameter("page-title")%></title>
 
 <!-- Styles -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/assets/css/main.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/assets/css/<%= request.getParameter("css-file") %>">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/frontend/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/frontend/assets/css/<%= request.getParameter("css-file") %>">
 <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
 
 <!-- Fonts -->

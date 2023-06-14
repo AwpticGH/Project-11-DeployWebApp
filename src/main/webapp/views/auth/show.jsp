@@ -1,4 +1,7 @@
 <%@ page import="ccit.g2airline.project11deployableweb.model.database.AuthModel" %>
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebRoute" %>
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebVariable" %>
+<%@page contentType="text/html; ISO-8859-1" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,32 +28,32 @@
             <p class="lead">Edit account <%= model.getUsername()  %> in G2Airline</p>
             <div class="row pt-5">
                 <div class="col-12">
-                    <form method="POST" action="/auth/profile">
-                        <input type="hidden" name="accountId" value="<%= model.getId() %>" />
+                    <form method="POST" action="<%= WebRoute.AUTH_SHOW %>">
+                        <input type="hidden" name="<%= WebVariable.ACCOUNT_ID %>" value="<%= model.getId() %>" />
                         <div class="mb-3">
                             <label class="form-label">Name</label>
                             <input type="text" class="form-control"
-                                   name="name" readonly
+                                   name="<%= WebVariable.NAME %>" readonly
                                    value="<%= model.getName() %>"
                             >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="text" class="form-control"
-                                   name="email" readonly
+                                   name="<%= WebVariable.EMAIL %>" readonly
                                    value="<%= model.getEmail() %>"
                             >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input type="password" class="form-control"
-                                   name="password"
+                                   name="<%= WebVariable.PASSWORD %>"
                                    value="<%= model.getPassword() %>"
                             >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Title</label>
-                            <select class="form-select" aria-label="Default select example" name="title">
+                            <select class="form-select" aria-label="Default select example" name="<%= WebVariable.TITLE %>">
                                 <option value="Mr" <%= (model.getTitle().equals("Mr") ? "selected" : "") %>>Mr</option>
                                 <option value="Mrs" <%= (model.getTitle().equals("Mrs") ? "selected" : "") %>>Mrs</option>
                                 <option value="Miss" <%= (model.getTitle().equals("Miss") ? "selected" : "") %>>Miss</option>
@@ -58,7 +61,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Gender</label>
-                            <select class="form-select" aria-label="Default select example" name="gender">
+                            <select class="form-select" aria-label="Default select example" name="<%= WebVariable.GENDER %>">
                                 <option value="Male" <%= (model.getGender().equals("Male") ? "selected" : "") %>>Male</option>
                                 <option value="Female" <%= (model.getGender().equals("Female") ? "selected" : "") %>>Female</option>
                             </select>
@@ -66,14 +69,14 @@
                         <div class="mb-3">
                             <label class="form-label">Date of Birth</label>
                             <input type="date" class="form-control"
-                                   placeholder="Date of Birth..." name="dob" required
+                                   placeholder="Date of Birth..." name="<%= WebVariable.DATE_OF_BIRTH %>" required
                                    value="<%= model.getDate_of_birth() %>"
                             >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone Number</label>
                             <input type="number" class="form-control"
-                                   placeholder="Phone Number..." name="phoneNumber" required
+                                   placeholder="Phone Number..." name="<%= WebVariable.PHONE_NUMBER %>" required
                                    value="<%= model.getPhone_number() %>"
                             >
                         </div>

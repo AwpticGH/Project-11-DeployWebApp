@@ -1,4 +1,5 @@
 <%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebVariable" %>
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebRoute" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
     <div class="container">
         <div class="title">Registration</div>
         <div class="content">
-            <form method="POST" action="Register">
+            <form method="POST" action="<%= WebRoute.AUTH_CREATE %>">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Full Name</span>

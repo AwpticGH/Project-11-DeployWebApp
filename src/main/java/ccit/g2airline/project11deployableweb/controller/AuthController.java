@@ -28,11 +28,18 @@ public class AuthController extends BaseController implements CreateData, Update
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     AuthModel result = data.getValue(AuthModel.class);
-                    if (result.getEmail().equals(model.getEmail()) && result.getPassword().equals(model.getPassword())) {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("AuthModel", result);
-                        request.getAsyncContext().complete();
-                        System.out.println("Login Success");
+                    if (result.getEmail().equals(model.getEmail())) {
+                        if (result.getPassword().equals(model.getPassword())) {
+                            request.getSession().setAttribute("AuthModel", result);
+                            request.setAttribute(WebVariable.ALERT, "Login Success!");
+                            request.getAsyncContext().complete();
+                            System.out.println("Login Success");
+                        }
+                        else {
+                            request.setAttribute(WebVariable.ALERT, "Login Failed!\nPlease Recheck Your Credentials");
+                            request.getAsyncContext().complete();
+                            System.out.println("Login Failed");
+                        }
                         break;
                     }
                 }
@@ -69,7 +76,7 @@ public class AuthController extends BaseController implements CreateData, Update
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                databaseError.getMessage();
+                System.out.println(databaseError.getMessage());
                 request.getAsyncContext().complete();
                 request.setAttribute("my-alert", "Register Failed! Please Try Again Later");
             }

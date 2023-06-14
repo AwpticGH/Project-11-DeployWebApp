@@ -16,17 +16,19 @@ import ccit.g2airline.project11deployableweb.myInterface.database.DeleteData;
 import ccit.g2airline.project11deployableweb.myInterface.database.ReadData;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 public class ReservationController extends BaseController implements CreateData, ReadData, DeleteData {
     @Override
     public void create(HttpServletRequest request, BaseModel baseModel) {
-        ReservationModel model = (ReservationModel) baseModel;
+        ReservedFlightModel model = (ReservedFlightModel) baseModel;
         DatabaseReference reference = DatabaseConfig.getReference(DatabaseTable.TABLE_RESERVATIONS);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String key = String.valueOf(dataSnapshot.getChildrenCount());
                 String id = DatabaseHelper.parseDataCountAsId(dataSnapshot.getChildrenCount());
-                model.setId(id);
+                model.getReservationModel().setId(id);
                 reference.child(key).setValue(model, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError error, DatabaseReference reference) {
@@ -38,14 +40,20 @@ public class ReservationController extends BaseController implements CreateData,
                                 : "SERVER ERROR!!!\nPlease Try Again Later!"
                             )
                         );
-                        request.getAsyncContext().complete();
+
+                        for (int i = 0; i < model.getReservationInfoModels().size(); i++) {
+                            model.getReservationInfoModels().get(i).setReservation_id(id);
+                        }
+
+                        ReservationInfoController ric = new ReservationInfoController();
+                        ric.create(request, (List<BaseModel>)(List<?>) model.getReservationInfoModels());
                     }
                 });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                databaseError.getMessage();
+                System.out.println(databaseError.getMessage());
                 request.setAttribute(WebVariable.ALERT, "SERVER ERROR!!!\nPlease Try Again Later!");
                 request.getAsyncContext().complete();
             }

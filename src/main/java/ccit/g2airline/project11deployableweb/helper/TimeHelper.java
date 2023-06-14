@@ -7,8 +7,7 @@ public class TimeHelper {
         int hours = Integer.parseInt(minute) / 60;
         int minutes = Integer.parseInt(minute) % 60;
 
-        String convertedTime = hours + ":" + minutes + ":" + seconds;
-        return convertedTime;
+        return hours + ":" + minutes + ":" + seconds;
     }
     
     public static String removeSecondsFromTime(String time) {

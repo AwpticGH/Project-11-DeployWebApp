@@ -1,11 +1,11 @@
 package ccit.g2airline.project11deployableweb.servlet.auth;
 
 import ccit.g2airline.project11deployableweb.controller.AuthController;
+import ccit.g2airline.project11deployableweb.dictionary.WebRoute;
 import ccit.g2airline.project11deployableweb.dictionary.WebVariable;
 import ccit.g2airline.project11deployableweb.model.database.AuthModel;
 import ccit.g2airline.project11deployableweb.myInterface.servlet.GetServlet;
 import ccit.g2airline.project11deployableweb.myInterface.servlet.PostServlet;
-import ccit.g2airline.project11deployableweb.servlet.FirebaseServlet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "authRegisterServlet", value = "/auth/register", asyncSupported = true)
+@WebServlet(name = "authRegisterServlet", value = WebRoute.AUTH_CREATE, asyncSupported = true)
 public class CreateServlet extends HttpServlet implements GetServlet, PostServlet {
 
     @Override
@@ -49,7 +49,7 @@ public class CreateServlet extends HttpServlet implements GetServlet, PostServle
             AuthController controller = new AuthController();
             controller.create(request, model);
 
-            response.sendRedirect("/");
+            response.sendRedirect(WebRoute.FLIGHT_INDEX);
         }
     }
 }

@@ -14,7 +14,7 @@ public class FirebaseServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.service(req, resp);
 
-        if (req.getSession().isNew()) {
+        if (!FirebaseConfig.isInitialized()) {
             FirebaseConfig.init();
             System.out.println("Firebase Initialized");
         }

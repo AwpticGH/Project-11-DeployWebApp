@@ -1,2 +1,2 @@
-<script src=${pageContext.request.contextPath}"/public/assets/js/main.js" type="application/ecmascript"></script>
+<script src="${pageContext.request.contextPath}/public/assets/js/main.js" type="application/javascript"></script>
 <script src="${pageContext.request.contextPath}/public/assets/js/<%= request.getParameter("js-file") %>" type="application/javascript"></script>

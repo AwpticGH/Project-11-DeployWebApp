@@ -1,6 +1,7 @@
 package ccit.g2airline.project11deployableweb.servlet.auth;
 
 import ccit.g2airline.project11deployableweb.controller.AuthController;
+import ccit.g2airline.project11deployableweb.dictionary.WebRoute;
 import ccit.g2airline.project11deployableweb.dictionary.WebVariable;
 import ccit.g2airline.project11deployableweb.model.database.AuthModel;
 import ccit.g2airline.project11deployableweb.myInterface.servlet.GetServlet;
@@ -14,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "authShowServlet", value = "/auth/profile", asyncSupported = true)
+@WebServlet(name = "authShowServlet", value = WebRoute.AUTH_SHOW, asyncSupported = true)
 public class ShowServlet extends HttpServlet implements GetServlet, PostServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -39,6 +40,6 @@ public class ShowServlet extends HttpServlet implements GetServlet, PostServlet 
         AuthController controller = new AuthController();
         controller.update(request, model);
 
-        response.sendRedirect("/auth/profile");
+        response.sendRedirect(WebRoute.AUTH_SHOW);
     }
 }
