@@ -1,4 +1,6 @@
 <%@ page import="ccit.g2airline.project11deployableweb.model.database.AuthModel" %>
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebVariable" %>
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebRoute" %>
 <!DOCTYPE html>
 <html>
 
@@ -22,11 +24,13 @@
 
 <!-- Begin page content -->
 <%
-    int passCount = Integer.parseInt(request.getParameter("passengerCount"));
-    String flightId = request.getParameter("flightId");
-    String seatClass = request.getParameter("seatClass");
+    String passCount = request.getParameter(WebVariable.PASSENGER_COUNT);
+    String flightId = request.getParameter(WebVariable.FLIGHT_ID);
+    String seatClass = request.getParameter(WebVariable.SEAT_CLASS);
 
-    AuthModel model = (AuthModel)session.getAttribute("AuthModel");
+    System.out.println("from create.jsp : passCount = " + passCount + "|");
+
+    AuthModel model = (AuthModel) session.getAttribute("AuthModel");
 %>
 <main class="flex-shrink-0">
     <div class="container">
@@ -36,32 +40,31 @@
         <p class="lead">Fill In Ticket Detail</p>
         <div class="row pt-5">
             <div class="col-12">
-                <form method="POST" action="Reservation">
-                    <input type="hidden" name="flightId" value="<%= flightId%>" />
-                    <input type="hidden" name="accountId" value="<%= model.getId()%>" />
-                    <input type="hidden" name="passengerCount" value="<%= passCount%>" />
-                    <input type="hidden" name="seatClass" value="<%= seatClass%>">
-                    <% for (int i = 0; i < passCount; i++) { %>
-                    <p class="lead">Person - <%= (Integer)i+1%></p>
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" placeholder="Enter your name" name="name<%= i%>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Gender</label>
-                        <select class="form-select" aria-label="Default select example" name="gender<%= i%>" required>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Date Of Birth</label>
-                        <input type="date" class="form-control" placeholder="Enter Date Of Birth" name="dob<%= i%>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
-                        <input type="number" class="form-control" placeholder="Enter Your Phone number" name="phoneNumber<%= i%>">
-                    </div>
+                <form method="POST" action="<%= WebRoute.RESERVATION_CREATE %>">
+                    <input type="hidden" name="<%= WebVariable.FLIGHT_ID %>" value="<%= flightId %>" />
+                    <input type="hidden" name="<%= WebVariable.PASSENGER_COUNT %>" value="<%= passCount %>" />
+                    <input type="hidden" name="<%= WebVariable.SEAT_CLASS %>" value="<%= seatClass %>" />
+                    <% for (int i = 0; i < Integer.parseInt(passCount); i++) { %>
+                        <p class="lead">Person - <%= (i + 1) %></p>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your name" name="<%= WebVariable.passengerName(i) %>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <select class="form-select" aria-label="Default select example" name="<%= WebVariable.passengerGender(i) %>" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date Of Birth</label>
+                            <input type="date" class="form-control" placeholder="Enter Date Of Birth" name="<%= WebVariable.passengerDateOfBirth(i) %>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" placeholder="Enter Your Phone number" name="<%= WebVariable.passengerPhoneNumber(i) %>">
+                        </div>
                     <% } %>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary btn-small btn-rounded">Submit</button>

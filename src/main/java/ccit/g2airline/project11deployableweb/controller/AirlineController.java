@@ -25,13 +25,23 @@ public class AirlineController extends BaseController implements ReadData {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int iterator = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    AirlineModel airlineModel = data.getValue(AirlineModel.class);
-                    if (airlineModel.getId().equals(model.getAirlineModels().get(iterator).getId())) {
-                        model.getAirlineModels().set(iterator, airlineModel);
-                    }
-                    if (iterator == model.getAirlineModels().size() - 1) {
+                    if (iterator == model.getAirlineModels().size()) {
                         break;
                     }
+                    System.out.println("Loop : " + (iterator + 1));
+                    AirlineModel result = data.getValue(AirlineModel.class);
+
+                    String resultAirlineId = result.getId();
+                    String airlineId = model.getAirlineModels().get(iterator).getId();
+
+                    System.out.println("Result AirlineID : " + resultAirlineId);
+                    System.out.println("Wanted AirlineID : " + airlineId);
+
+                    if (resultAirlineId.equals(airlineId)) {
+                        System.out.println("Airline Found");
+                        model.getAirlineModels().set(iterator, result);
+                    }
+                    iterator++;
                 }
 
                 request.setAttribute("FlightSearchedModel", model);

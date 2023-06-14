@@ -26,7 +26,8 @@ public class FirebaseConfig {
             throw new RuntimeException(e);
         }
 
-        FirebaseApp.initializeApp(options);
+//        FirebaseApp.initializeApp(options);
+        FirebaseApp.initializeApp();
     }
 
     public static boolean isInitialized() {

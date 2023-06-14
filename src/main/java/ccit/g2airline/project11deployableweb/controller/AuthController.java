@@ -58,7 +58,7 @@ public class AuthController extends BaseController implements CreateData, Update
     public void create(HttpServletRequest request, BaseModel baseModel) {
         AuthModel model = (AuthModel) baseModel;
         DatabaseReference reference = DatabaseConfig.getReference(DatabaseTable.TABLE_USERS);
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 long count = dataSnapshot.getChildrenCount();

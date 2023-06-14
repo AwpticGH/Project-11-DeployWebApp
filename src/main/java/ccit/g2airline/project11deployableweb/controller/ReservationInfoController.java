@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ccit.g2airline.project11deployableweb.model.web.ReservedFlightModel;
+import ccit.g2airline.project11deployableweb.myInterface.database.CreateData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,39 +20,39 @@ import ccit.g2airline.project11deployableweb.myInterface.database.MultipleCreate
 import ccit.g2airline.project11deployableweb.myInterface.database.ReadData;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class ReservationInfoController extends BaseController implements ReadData, MultipleCreateData {
+public class ReservationInfoController extends BaseController implements ReadData, CreateData {
 
     @Override
-    public void create(HttpServletRequest request, List<BaseModel> baseModels) {
-        List<ReservationInfoModel> models = new ArrayList<>();
-        for (BaseModel baseModel : baseModels) {
-            models.add((ReservationInfoModel) baseModel);
-        }
-
+    public void create(HttpServletRequest request, BaseModel baseModel) {
+        ReservedFlightModel model = (ReservedFlightModel) baseModel;
         DatabaseReference reference = DatabaseConfig.getReference(DatabaseTable.TABLE_RESERVATIONS_INFO);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String key = DatabaseHelper.parseDataCountAsId(dataSnapshot.getChildrenCount());
-                for (ReservationInfoModel model : models) {
-                    reference.child(key).setValue(model, new DatabaseReference.CompletionListener() {
+        for (int i = 0; i < model.getReservationInfoModels().size(); i++) {
+            int iterator = i;
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String key = DatabaseHelper.parseDataCountAsId(dataSnapshot.getChildrenCount());
+                    ReservationInfoModel reservationInfoModel = model.getReservationInfoModels().get(iterator);
+                    reference.child(key).setValue(reservationInfoModel, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError error, DatabaseReference newReference) {
-                            if (error != null) {
+                            if (error == null) {
                                 request.setAttribute(WebVariable.ALERT, "SERVER ERROR!!!\nPlease Try Again Later!");
+                            }
+                            if (iterator == model.getReservationInfoModels().size() - 1) {
                                 request.getAsyncContext().complete();
                             }
                         }
                     });
                 }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println(databaseError.getMessage());
-                request.setAttribute(WebVariable.ALERT, "SERVER ERROR!!!\nPlease Try Again Later!");
-                request.getAsyncContext().complete();
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println(databaseError.getMessage());
+                    request.setAttribute(WebVariable.ALERT, "SERVER ERROR!!!\nPlease Try Again Later!");
+                    request.getAsyncContext().complete();
+                }
+            });
+        }
     }
 
     @Override

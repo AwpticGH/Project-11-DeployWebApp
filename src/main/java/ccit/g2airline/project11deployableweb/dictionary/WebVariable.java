@@ -22,5 +22,19 @@ public class WebVariable {
     public static final String SEAT_CLASS = "seat-class";
     public static final String FLIGHT_ID = "flight-id";
 
+    public static String passengerName(int index) {
+        return "passenger-name-" + String.valueOf(index);
+    }
 
+    public static String passengerGender(int index) {
+        return "passenger-gender-" + String.valueOf(index);
+    }
+
+    public static String passengerDateOfBirth(int index) {
+        return "passenger-date-of-birth-" + String.valueOf(index);
+    }
+
+    public static String passengerPhoneNumber(int index) {
+        return "passenger-phone-number-" + String.valueOf(index);
+    }
 }

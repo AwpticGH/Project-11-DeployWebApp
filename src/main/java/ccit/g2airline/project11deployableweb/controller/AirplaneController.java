@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AirplaneController extends BaseController implements ReadData {
@@ -29,16 +30,27 @@ public class AirplaneController extends BaseController implements ReadData {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int iterator = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    if (iterator == model.getAirplaneModels().size()) {
+                        break;
+                    }
+                    System.out.println("Loop : " + (iterator + 1)); // debug
+
                     AirplaneModel result = data.getValue(AirplaneModel.class);
                     AirlineModel airlineModel = new AirlineModel();
-                    if (result.getId().equals(model.getAirplaneModels().get(iterator).getId())) {
+                    AirplaneModel airplaneModel = model.getAirplaneModels().get(iterator);
+
+                    String resultAirplaneId = result.getId();
+                    String airplaneId = airplaneModel.getId();
+
+                    System.out.println("Result AirplaneId : " + resultAirplaneId);
+                    System.out.println("Wanted AirplaneId : " + airplaneId);
+
+                    if (resultAirplaneId.equals(airplaneId)) {
                         model.getAirplaneModels().set(iterator, result);
-                        airlineModel.setId(result.getId());
+                        airlineModel.setId(result.getAirline_id());
                         airlineModels.add(airlineModel);
+                        System.out.println("Airline " + (iterator + 1) + " has been set : " + airlineModel.getId());
                         iterator++;
-                    }
-                    if (iterator == model.getAirplaneModels().size() - 1) {
-                        break;
                     }
                 }
                 model.setAirlineModels(airlineModels);

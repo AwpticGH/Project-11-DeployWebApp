@@ -23,13 +23,13 @@ public class ReservationController extends BaseController implements CreateData,
     public void create(HttpServletRequest request, BaseModel baseModel) {
         ReservedFlightModel model = (ReservedFlightModel) baseModel;
         DatabaseReference reference = DatabaseConfig.getReference(DatabaseTable.TABLE_RESERVATIONS);
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String key = String.valueOf(dataSnapshot.getChildrenCount());
                 String id = DatabaseHelper.parseDataCountAsId(dataSnapshot.getChildrenCount());
                 model.getReservationModel().setId(id);
-                reference.child(key).setValue(model, new DatabaseReference.CompletionListener() {
+                reference.child(key).setValue(model.getReservationModel(), new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError error, DatabaseReference reference) {
                         request.setAttribute(
@@ -46,7 +46,7 @@ public class ReservationController extends BaseController implements CreateData,
                         }
 
                         ReservationInfoController ric = new ReservationInfoController();
-                        ric.create(request, (List<BaseModel>)(List<?>) model.getReservationInfoModels());
+                        ric.create(request, model);
                     }
                 });
             }

@@ -8,10 +8,8 @@ import ccit.g2airline.project11deployableweb.model.database.AirportModel;
 import ccit.g2airline.project11deployableweb.model.database.FlightModel;
 import ccit.g2airline.project11deployableweb.model.web.FlightSearchedModel;
 import ccit.g2airline.project11deployableweb.myInterface.servlet.GetServlet;
-import jakarta.servlet.AsyncEvent;
-import jakarta.servlet.AsyncListener;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
+import ccit.g2airline.project11deployableweb.servlet.FirebaseServlet;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "flightShowServlet", value = WebRoute.FLIGHT_SHOW, asyncSupported = true)
-public class ShowServlet extends HttpServlet implements GetServlet {
+public class ShowServlet extends FirebaseServlet implements GetServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -50,8 +48,12 @@ public class ShowServlet extends HttpServlet implements GetServlet {
         model.setFlightModels(flightModels);
         model.setPassengerSeatClass(passengerSeatClass);
 
+        System.out.println("Looking For Departure : " + departure);
+        System.out.println("Looking For Destination : " + destination);
+        System.out.println("Looking For Date : " + departureDate);
 
-        request.startAsync();
+        AsyncContext asyncContext = request.startAsync();
+        asyncContext.setTimeout(60000);
         AirportController ac = new AirportController();
         ac.get(request, model);
         request.getAsyncContext().addListener(new AsyncListener() {

@@ -22,17 +22,32 @@ public class RouteController extends BaseController implements ReadData {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int iterator = 0; // debug
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     RouteModel result = data.getValue(RouteModel.class);
-                    if (result.getDeparture_id().equals(model.getRouteModel().getDeparture_id()) && result.getDestination_id().equals(model.getRouteModel().getDestination_id())) {
-                        model.setRouteModel(result);
 
+                    String resultDepartureId = result.getDeparture_id();
+                    String resultDestinationId = result.getDestination_id();
+                    String departureId = model.getAirportDepartureModel().getId();
+                    String destinationId = model.getAirportDestinationModel().getId();
+
+                    System.out.println("Loop : " + (iterator + 1)); // debug
+                    System.out.println("RouteID : " + result.getId());
+                    System.out.println("Result DepartureID : " + resultDepartureId);
+                    System.out.println("Result DestinationID : " + resultDestinationId);
+                    System.out.println("Wanted DepartureID : " + departureId);
+                    System.out.println("Wanted DestinationID : " + destinationId);
+
+                    if (resultDepartureId.equals(departureId) && resultDestinationId.equals(destinationId)) {
+                        model.setRouteModel(result);
+                        System.out.println("RouteID Has Been Set : " + model.getRouteModel().getId());
                         FlightController fc = new FlightController();
                         fc.get(request, model);
+                        break;
                     }
+                    iterator++;
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("Cancelled");

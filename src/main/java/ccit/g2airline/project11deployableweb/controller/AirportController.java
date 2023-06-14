@@ -25,16 +25,20 @@ public class AirportController extends BaseController implements ReadData {
                 int iterator = 0; // debug
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     AirportModel result = data.getValue(AirportModel.class);
-                    System.out.println("Loop : " + (iterator + 1));
-                    System.out.println("City : " + result.getCity());
+
+                    System.out.println("Loop : " + (iterator + 1)); // debug
+                    System.out.println("City (ID) : " + result.getCity() + " (" + result.getId() + ")"); // debug
+
                     if (model.getAirportDepartureModel().getId() != null && model.getAirportDestinationModel().getId() != null) {
                         break;
                     }
                     if (result.getCity().equals(model.getAirportDepartureModel().getCity())) {
                         model.setAirportDepartureModel(result);
+                        System.out.println("Departure Has Been Set : " + model.getAirportDepartureModel().getCity() + " (" + model.getAirportDepartureModel().getId() + ")");
                     }
                     if (result.getCity().equals(model.getAirportDestinationModel().getCity())) {
                         model.setAirportDestinationModel(result);
+                        System.out.println("Destination Has Been Set : " + model.getAirportDestinationModel().getCity() + " (" + model.getAirportDestinationModel().getId() + ")");
                     }
                     iterator++;
                 }

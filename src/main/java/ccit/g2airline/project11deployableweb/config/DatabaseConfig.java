@@ -1,5 +1,7 @@
 package ccit.g2airline.project11deployableweb.config;
 
+import ccit.g2airline.project11deployableweb.controller.admin.DatabaseController;
+import ccit.g2airline.project11deployableweb.dictionary.DatabaseTable;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,6 +20,11 @@ public class DatabaseConfig {
             reference = reference.child(path);
         }
         return reference;
+    }
+
+    public static void main(String[] args) {
+        DatabaseController db = new DatabaseController();
+        db.delete(DatabaseTable.TABLE_RESERVATIONS, 0, 0);
     }
 
 }
