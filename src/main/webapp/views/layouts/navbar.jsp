@@ -1,10 +1,10 @@
 <%@ page import="ccit.g2airline.project11deployableweb.model.database.AuthModel" %>
 <%
     boolean isLogged = false;
-    session = request.getSession();
-    AuthModel model = (AuthModel) session.getAttribute("AuthModel");
+    AuthModel model = null;
     if (!session.isNew()) {
-        isLogged = (Boolean) session.getAttribute("isLogged");
+        model = (AuthModel) session.getAttribute("AuthModel");
+        isLogged = model != null;
     }
 %>
 <div class="wrapper" id="wrapper">
@@ -37,7 +37,7 @@
                                 <input type="hidden" name="user-id" value="<%= model.getId() %>">
                                 <button type="Submit">Ticket</button>
                             </form>
-                            <form action="/auth/logout" method="POST">
+                            <form action="/auth/logout" method="GET">
                                 <button type="Submit">Logout</button>
                             </form>
                         </div>

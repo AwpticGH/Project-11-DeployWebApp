@@ -1,29 +1,26 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Tomcat 10.1.9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.9" ALTERNATIVE_JRE_ENABLED="false">
+  <configuration default="false" name="glassfish6" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.1.0" ALTERNATIVE_JRE_ENABLED="false">
     <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+    <option name="UPDATING_POLICY" value="restart-server" />
     <deployment>
       <artifact name="Project-11-DeployableWeb:war exploded">
         <settings>
-          <option name="CONTEXT_PATH" value="/" />
+          <option name="defaultContextRoot" value="false" />
         </settings>
       </artifact>
     </deployment>
     <server-settings>
-      <option name="BASE_DIRECTORY_NAME" value="ee2ec6ef-9683-4b73-8abf-33f31e1fe1f7" />
+      <option name="DOMAIN" value="domain1" />
+      <option name="PRESERVE" value="false" />
+      <option name="COMPATIBILITY" value="false" />
+      <option name="VIRTUAL_SERVER" />
+      <option name="USERNAME" value="admin" />
+      <option name="CREDENTIAL_ALIAS" />
     </server-settings>
-    <predefined_log_file enabled="true" id="Tomcat" />
-    <predefined_log_file enabled="true" id="Tomcat Catalina" />
-    <predefined_log_file id="Tomcat Manager" />
-    <predefined_log_file id="Tomcat Host Manager" />
-    <predefined_log_file id="Tomcat Localhost Access" />
-    <extension name="coverage" sample_coverage="false" runner="jacoco">
-      <pattern>
-        <option name="PATTERN" value="ccit.*" />
-        <option name="ENABLED" value="true" />
-      </pattern>
-    </extension>
+    <predefined_log_file enabled="true" id="GlassFish" />
+    <extension name="coverage" sample_coverage="false" runner="jacoco" />
     <RunnerSettings RunnerId="Debug">
-      <option name="DEBUG_PORT" value="61207" />
+      <option name="DEBUG_PORT" value="9009" />
     </RunnerSettings>
     <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
       <option name="USE_ENV_VARIABLES" value="true" />
@@ -41,21 +38,6 @@
       </SHUTDOWN>
     </ConfigurationWrapper>
     <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-      <option name="USE_ENV_VARIABLES" value="true" />
-      <STARTUP>
-        <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="" />
-        <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="" />
-      </STARTUP>
-      <SHUTDOWN>
-        <option name="USE_DEFAULT" value="true" />
-        <option name="SCRIPT" value="" />
-        <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="" />
-      </SHUTDOWN>
-    </ConfigurationWrapper>
-    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
         <option name="USE_DEFAULT" value="true" />

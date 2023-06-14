@@ -25,7 +25,7 @@
             <p class="lead">Edit account <%= model.getUsername()  %> in G2Airline</p>
             <div class="row pt-5">
                 <div class="col-12">
-                    <form method="POST" action="Account">
+                    <form method="POST" action="/auth/profile">
                         <input type="hidden" name="accountId" value="<%= model.getId() %>" />
                         <div class="mb-3">
                             <label class="form-label">Name</label>

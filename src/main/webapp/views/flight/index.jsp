@@ -1,5 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <jsp:include page="${pageContext.request.contextPath}/views/layouts/head.jsp">
         <jsp:param name="page-title" value="Home"/>

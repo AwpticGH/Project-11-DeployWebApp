@@ -1,3 +1,4 @@
+<%@ page import="ccit.g2airline.project11deployableweb.dictionary.WebVariable" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,23 +20,23 @@
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Full Name</span>
-                        <input type="text" placeholder="Enter your name" name="name" required>
+                        <input type="text" placeholder="Enter your name" name="<%= WebVariable.NAME %>>" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Email</span>
-                        <input type="email" placeholder="Enter your Email" name="email" required>
+                        <input type="email" placeholder="Enter your Email" name="<%= WebVariable.EMAIL %>" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Password</span>
-                        <input type="password" placeholder="Enter your password" name="password" required>
+                        <input type="password" placeholder="Enter your password" name="<%= WebVariable.PASSWORD %>" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Confirm Password</span>
-                        <input type="password" placeholder="Confirm your password" name="passwordConfirmed" required>
+                        <input type="password" placeholder="Confirm your password" name="<%= WebVariable.PASSWORD_CONFIRMATION %>" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Title</span>
-                        <select class="form-select" aria-label="Default select example" name="title" required>
+                        <select class="form-select" aria-label="Default select example" name="<%= WebVariable.TITLE %>" required>
                             <option value="Mr">Mr</option>
                             <option value="Miss">Miss</option>
                             <option value="Mrs">Mrs</option>
@@ -43,17 +44,17 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Phone Number</span>
-                        <input type="number" placeholder="Enter your phone number" name="phoneNumber" required>
+                        <input type="number" placeholder="Enter your phone number" name="<%= WebVariable.PHONE_NUMBER %>" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Date of Birth</span>
-                        <input type="date" placeholder="Enter your date of birth" name="dob" required>
+                        <input type="date" placeholder="Enter your date of birth" name="<%= WebVariable.DATE_OF_BIRTH %>" required>
                     </div>
                 </div>
                 <div class="gender-details">
-                    <input type="radio" name="gender" id="dot-1" value="Male">
-                    <input type="radio" name="gender" id="dot-2" value="Female">
-                    <input type="radio" name="gender" id="dot-3" value="null">
+                    <input type="radio" name="<%= WebVariable.GENDER %>" id="dot-1" value="Male">
+                    <input type="radio" name="<%= WebVariable.GENDER %>" id="dot-2" value="Female">
+                    <input type="radio" name="<%= WebVariable.GENDER %>" id="dot-3" value="null">
                     <span class="gender-title">Gender</span>
                     <div class="category">
                         <label for="dot-1">

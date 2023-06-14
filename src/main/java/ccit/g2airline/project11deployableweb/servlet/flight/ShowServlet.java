@@ -4,6 +4,8 @@ import ccit.g2airline.project11deployableweb.controller.AirportController;
 import ccit.g2airline.project11deployableweb.dictionary.WebVariable;
 import ccit.g2airline.project11deployableweb.helper.StringHelper;
 import ccit.g2airline.project11deployableweb.model.web.FlightSearchModel;
+import ccit.g2airline.project11deployableweb.myInterface.servlet.GetServlet;
+import ccit.g2airline.project11deployableweb.servlet.FirebaseServlet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "flightShowServlet", value = "/flight/get", asyncSupported = true)
-public class ShowServlet extends HttpServlet {
+public class ShowServlet extends HttpServlet implements GetServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String departure = request.getParameter(WebVariable.DEPARTURE_CITY);

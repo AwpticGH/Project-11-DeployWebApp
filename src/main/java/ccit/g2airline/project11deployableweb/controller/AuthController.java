@@ -26,15 +26,13 @@ public class AuthController extends BaseController implements CreateData, Update
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("Found : " + dataSnapshot.exists());
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    System.out.println("Current Key : " + data.getKey());
                     AuthModel result = data.getValue(AuthModel.class);
                     if (result.getEmail().equals(model.getEmail()) && result.getPassword().equals(model.getPassword())) {
                         HttpSession session = request.getSession();
                         session.setAttribute("AuthModel", result);
-                        session.setAttribute("isLogged", true);
                         request.getAsyncContext().complete();
+                        System.out.println("Login Success");
                         break;
                     }
                 }
@@ -94,6 +92,9 @@ public class AuthController extends BaseController implements CreateData, Update
                                 : "Update Account Failed, Please Try Again Later!"
                         )
                 );
+                if (databaseError == null) {
+                    request.getSession().setAttribute("AuthModel", model);
+                }
                 request.getAsyncContext().complete();
             }
         });
