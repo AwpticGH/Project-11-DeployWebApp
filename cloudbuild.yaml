@@ -1,0 +1,4 @@
+steps :
+  - name : "gcr.io/google.com/cloud-builders/mvn"
+    entrypoint : "bash"
+    args : ["-c", "gcloud app deploy"]

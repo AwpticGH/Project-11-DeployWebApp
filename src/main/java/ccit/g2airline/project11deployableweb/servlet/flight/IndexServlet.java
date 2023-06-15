@@ -8,10 +8,10 @@ import ccit.g2airline.project11deployableweb.servlet.FirebaseServlet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet(name = "flightIndexServlet", value = WebRoute.FLIGHT_INDEX)

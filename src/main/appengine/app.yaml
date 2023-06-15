@@ -1,1 +1,2 @@
 runtime: java11
+entrypoint: "java -cp '*' ccit.g2airline.project11deployableweb.tomcat.Main Project-11-DeployableWeb-1.0-SNAPSHOT"
